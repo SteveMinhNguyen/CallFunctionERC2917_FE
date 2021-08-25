@@ -1,12 +1,8 @@
 import { createNamespacedHelpers } from "vuex";
 import { Ajax } from "@/axios/http";
 import { SwapInstance } from "@/assets/swap.init";
+import { ERC2917Instance } from "@/assets/erc2917.init";
 import { Web3Provider } from "@/assets/sdk/Web3Provider";
-import {
-    convertNormalToBigNumber,
-    convertBigNumberToNormal,
-    calculatePercentage
-} from "../assets/sdk/util/util.js";
 export const governance = {
     namespaced: true,
     state: {
@@ -54,32 +50,6 @@ export const governance = {
                 commit("setTokenInfo", tokenInfo);
                 return tokenInfo;
             });
-        },
-
-        getERC2917Info() {
-            let tokenInfo = {};
-            let testNetInfo = {};
-            let tokenAddress = [];
-            let tokenList = [];
-
-            SwapInstance.$provider.connectMetaMask();
-            SwapInstance.$provider.connectBinanceWallet();
-            const isEthNet = SwapInstance.$provider.isEthNet();
-            const isBSCScan = SwapInstance.$provider.isBscNet();
-            testNetInfo = { isEthNet, isBSCScan };
-            tokenAddress = SwapInstance.$provider.getContractAddress();
-            const currentAccount = SwapInstance.$provider.currentAccount;
-
-            SwapInstance.$query.getBalanceOf().then(bal => {
-                tokenInfo.balance = bal;
-            });
-            SwapInstance.$query.getName().then(name => {
-                tokenInfo.name = name;
-            });
-
-            tokenInfo.address = tokenAddress;
-            tokenInfo.currentAccount = currentAccount;
-            return { testNetInfo, tokenInfo, tokenList };
         },
         approveTokenGOV({ state }, { totalAmount, cb }) {
             return SwapInstance.$caller.approveTokenGOV(

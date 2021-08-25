@@ -1,38 +1,43 @@
 <template>
     <div class="parameter-asset-page">
         <p>
-            <span class="left">{{ $t('governanceControl.feeSumtitle') }}</span>
+            <span class="left">{{ $t("governanceControl.feeSumtitle") }}</span>
             <span class="right">{{ totalReward }} {{ $project }}</span>
         </p>
         <p class="">
-            <span class="left">{{ $t('governanceControl.stakeSumtitle') }}</span>
+            <span class="left">{{
+                $t("governanceControl.stakeSumtitle")
+            }}</span>
             <span class="right">{{ totalStake }} {{ $project }}</span>
         </p>
         <p class="">
-      <span class="left">
-        {{ $t('governanceControl.totalDgastitle') }}
-      </span>
+            <span class="left">
+                {{ $t("governanceControl.totalDgastitle") }}
+            </span>
             <span class="right">{{ pool }} {{ $project }}</span>
         </p>
         <p class="">
-                <span class="left">
-                    {{ $t('governanceControl.totalBurned') }}
-                </span>
+            <span class="left">
+                {{ $t("governanceControl.totalBurned") }}
+            </span>
             <span class="right">{{ burn }} {{ $project }}</span>
+        </p>
+        <p class="">
+            <span class="left">Balance Of ERC2917 Contract</span>
+            <span class="right">{{ balanceOf }} {{ name }} </span>
         </p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'GovernmentAsset',
-    props: ['totalReward', 'totalStake', 'pool', 'burn'],
+    name: "GovernmentAsset",
+    props: ["totalReward", "totalStake", "pool", "burn", "balanceOf", "name"],
     data() {
         return {};
     },
-    mounted() {
-    },
-    methods: {},
+    mounted() {},
+    methods: {}
 };
 </script>
 
